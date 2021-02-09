@@ -20,6 +20,13 @@
             <artifactId>spring-boot-starter-data-r2dbc</artifactId>
         </dependency>
 
+        <!-- Comment the following if using a db other than h2 -->
+        <dependency>
+            <groupId>io.r2dbc</groupId>
+            <artifactId>r2dbc-h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- Uncomment the following to use PostgreSQL: -->
         <!--
         <dependency>
@@ -42,12 +49,6 @@
         </dependency>
         -->
 
-        <!-- Comment the following if using a db other than h2 -->
-        <dependency>
-            <groupId>io.r2dbc</groupId>
-            <artifactId>r2dbc-h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 
     <properties>
