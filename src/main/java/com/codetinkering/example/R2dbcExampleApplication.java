@@ -3,6 +3,7 @@ package com.codetinkering.example;
 import io.r2dbc.spi.ConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -44,20 +45,28 @@ public class R2dbcExampleApplication {
             // Create some vehicles and insert them into the database, blocking for up to 5 seconds
             vehicleRepository.saveAll(vehicles).blockLast(Duration.ofSeconds(5));
 
+            logger.info("----------");
+
             // Find one or more vehicles from the repository using a query
             vehicleRepository.findByMake("Chevy").doOnNext(vehicle -> {
                 logger.info(vehicle.toString());
             }).blockLast(Duration.ofSeconds(5));
+
+            logger.info("----------");
 
             // Find a single vehicle by an ID, returns a Mono
             vehicleRepository.findById(1).doOnNext(vehicle -> {
                 logger.info(vehicle.toString());
             }).block(Duration.ofSeconds(5));
 
+            logger.info("----------");
+
             // Print all vehicles from the repository
             vehicleRepository.findAll().doOnNext(vehicle -> {
                 logger.info(vehicle.toString());
             }).blockLast(Duration.ofSeconds(5));
+
+            logger.info("----------");
 
             // Print all vehicles that match the provided make "Ford"
             // block the thread until the mono is completed or the request times out (5 seconds)
